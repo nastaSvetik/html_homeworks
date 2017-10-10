@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Домашнее задание JavaScript 1</title>
+</head>
+<body>
+
+<h1>Домашнее задание по JavaScript 2. Массивы</h1>
+	<h2>Задача №2. Поломанный reverse</h2>
+	<p>Дан массив чисел. Написать функцию, "переворачивающую" массив — как при использовании <b>reverse</b>. Сам  <b>reverse</b> использовать нельзя. При переборе массива использовать <b>forEach</b>.</p>
+	
+	<script type="text/javascript">
+	console.log ('Task # 2');
+
+		var unreversed = [1, 2, 4, 8, 16, 32, 64];
+		function reverse (elements){
+	       	elements.forEach(function (item, index, elements){
+	    		var j = elements.length - index-1;
+	    		var temp;    		
+	    		  	if (index < j){
+					temp = elements[j];
+	    			elements[j] = item;
+	    			elements[index] = temp;      			
+					};				
+	   		}); 
+	       	return elements;
+	    };   	
+	   	console.log (reverse(unreversed));
+					
+	console.log ('********');  
+	</script>
+
+
+
+	<h2>Задача №3. Поломанный sort</h2>
+	<p>Дан массив зарплат (целые числа), полученный из базы данных. Необходимо исправить функцию <b>sortSalaries</b>, сортирующую список по возрастанию. Из-за программного сбоя нельзя использовать функцию-callback внутри <b>sort</b> и нельзя использовать собственную "ручную" сортировку. При переборе массива использовать <b>for</b>.</p>
+	<pre class="hometask"></pre>
+
+		<script type="text/javascript">
+		console.log ('Task # 3');
+
+			var salaries = [3100, 890, 1120, 740, 2100, 550, 540, 3200, 1570, 250];
+			function sortSalaries(salaryList) {
+			  var salaryListCopy = salaryList.slice();
+			  var maxElemLength = 0;
+
+
+			  for (i=0; i<salaryListCopy.length;i++){
+			  	salaryListCopy[i] = String(salaryListCopy[i]);
+			  	if (maxElemLength < salaryListCopy[i].length) maxElemLength = salaryListCopy[i].length;
+			  }	
+			  for (i=0; i<salaryListCopy.length;i++){
+			  	while (salaryListCopy[i].length < maxElemLength){
+			  		salaryListCopy[i] = '0'+salaryListCopy[i];
+			  	}			  	
+			  }		 
+
+			  salaryListCopy.sort();
+
+			  for (i=0; i<salaryListCopy.length;i++){
+			  	salaryListCopy[i] = +salaryListCopy[i];
+			  }	
+			  return salaryListCopy;
+			}
+			console.log(sortSalaries(salaries));
+
+		console.log ('********');  	
+		</script>
+
+
+
+	<h2>Задача №4. Максимум из минимумов</h2>
+	<p>Дан массив зарплат из задачи №3. Нужно найти максимальную зарплату, меньшую 1000. Использовать <b>reduce</b>. Результ вывести в консоль.</p>
+	<script type="text/javascript">
+		console.log ('Task # 4');
+		 
+		var before1000 = salaries.reduce(function(previousValue, current){
+			if (current > previousValue && current <=1000) previousValue = current;
+			return previousValue;
+		},0);
+		console.log(before1000);
+
+		console.log ('********');
+	</script>
+
+
+
+	<h2>Задача №5. Поиск квадратов</h2>
+	<p>Дан массив целых чисел. Нужно найти подмассив чисел, которые являются квадратами других целых чисел. Для работы со степенями можно использовать <b>Math.pow(<em>число, степень</em>)</b>.</p>
+	
+	<script type="text/javascript">
+		console.log ('Task # 5');
+
+		var mayBeSquares = [1, 2, 3, 4, 8, 9, 15, 16, 34, 36, 38, 24, 25, 26];
+		function extractSquares(nums) {			
+			return nums.filter(function(item) {						
+				return (Math.sqrt(item)%1 == 0) 					
+			});			    
+		}
+		console.log(extractSquares(mayBeSquares));		
+			
+		console.log ('********');
+	</script>
+
+
+
+	<h2>Задача №6. Только уникальные</h2>
+	<p>Дан массив имен сотрудников. Найти подмассив уникальных имен.</p>	
+
+	<script type="text/javascript">
+		console.log ('Task # 6');
+
+		var teamMates = ['Mike', 'Peter', 'Alex', 'Sonya', 'Mike', 'Mary', 'Like', 'Alex', 'Abraham', 'Mary'];
+		function unique(elements) {
+			var newElements = elements.slice()
+			return elements.filter(function() {				
+		        var shifted = newElements.shift();		       			
+				if (newElements.includes(shifted)) {
+					newElements.push(shifted);
+					return false;}
+				else {
+					newElements.push(shifted);
+					return true;}					 
+			});	
+		}
+		console.log(unique(teamMates));
+
+		console.log ('********');
+	</script>
+
+	<h2>Задача №7. Складской учет</h2>
+	<p>Есть данные учета поступления/отправки товаров на склад в виде массива. В четных индексах массива - коды поступивших товаров, в нечетных индексах - коды отправленных со склада товаров. Определить, сколько всего товаров пришло и было отправлено со склада, а также получить массив кодов имеющихся на складе товаров.</p>
+	<script type="text/javascript">
+		console.log ('Task # 7');
+
+		var transactions = [
+		 	[101, 102, 103], // поступление
+		  	[], // отправка
+		  	[104, 105, 106], // поступление и т.д.
+		  	[103], // отправка и т.д.
+		  	[107, 108],
+		 	[105, 106],
+		 	[109, 110, 111, 112],
+		  	[108, 110],
+		  	[103],
+		  	[111]
+		];		
+		function balance(actions) {
+	 		var itemsIn = 0;
+	 		var itemsOut = 0;
+	  		var itemsAvailable = [];
+	  		// можно добавлять переменные, кроме тех что были в условиях к задачи?
+	  		var In = [];
+	  		var Out = [];
+	 		actions.forEach(function(item,index){
+	 			if (index%2) {
+	 				itemsOut +=item.length; 
+	 				Out = Out.concat(item); }
+	 			else {
+	 				itemsIn +=item.length; 
+	 				In = In.concat(item) ;};
+	 		});		 		
+	 		itemsAvailable = In.filter(function(item){
+	 			if (Out.includes(item)) Out.splice(Out.indexOf(item), 1);	 			
+	 			else return true; 
+	 		});
+	 		console.log('Пришло: ' + itemsIn + '\n' + 'Отправлено: ' + itemsOut + '\n' +'Товары на складе: ' + itemsAvailable);
+		}
+		balance(transactions);
+
+		console.log ('********');
+	</script>
+
+</body>
+</html>

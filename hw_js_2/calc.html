@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Домашнее задание JavaScript 1</title>
+</head>
+<body>
+
+<h1>Домашнее задание по JavaScript 2. Массивы</h1>
+	<h2>Задача №1. Калькулятор</h2>
+	<p>Написать простой калькулятор, который через <b>prompt</b> будет запрашивать у пользователя первый операнд (число), арифметическое действие ("+-/*"), второй операнд (число) и выводить результат вычислений в <b>alert</b>. Если на любом из этапов ввод неправильный - не переходить к следующему этапу. Не использовать <b>eval</b>. Оформить код в отдельный файл <u>calc.html</u>.</p>
+		<script type="text/javascript">
+				var result;
+				var a,b, action;
+				var actionS = ['+','-','*','/'];
+		    do {a = Number(prompt('Введите первый операнд', 0));
+				}		    
+			while (isNaN(a));
+			do {action = prompt('Введите арифметическое действие ( + - / * )', '+');}
+			while (!actionS.includes(action));
+			do {b = Number(prompt('Введите второй операнд', 0));
+				}		    
+			while (isNaN(b));			 
+			switch (action){
+				case '+': 
+					result = a+b; 
+					break;
+				case '-': 
+					result = a-b; 
+					break;
+				case '/': {
+					if (b != 0)	result = a/b;
+					else result = 'На ноль делить нельзя!'; 
+					break;
+					}
+				case '*': 
+					result = a/b; 
+					break;	
+			}
+			
+			alert ('Результат: '+ result); 
+		</script>
+	
+
+
+
+
+</body>
+</html>
