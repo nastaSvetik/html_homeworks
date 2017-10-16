@@ -159,7 +159,7 @@ console.log('Сумма чисел от 1 до ' + n + ' равна: ' + sumRecu
 		var tarif = 1.68;		
 		var power = 2.5;		
 		var pricePerHour = tarif * power;
-		var pricePerHourDisc = (tarif + power) / 2;
+		var pricePerHourDisc = (tarif * power) / 2;
 		var i = startHour;
 		var result = 0;
 		if (startHour > endHour || startHour > 24 || endHour > 24) return 'Неверный ввод';		
